@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h1>{{title}}</h1>
+<div>
+    <label>제목: </label>
+    {{row[0].title}}
+</div>
+<div>
+    <label>내용: </label>
+    {{row[0].content}}
+</div>
+<div>
+    <button><a href="/">홈</a></button>
+    <button><a href="/edit/{{row[0].num}}">수정</a></button>
+    <button><a href="/del/{{row[0].num}}">삭제</a></button>
+</div>
+
+{% endblock %}

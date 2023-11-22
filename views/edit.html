@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<form method="post">
+    <h1>{{title}}</h1>
+    <div>
+        <label>제목: </label>
+        <input type="text" name="title" id="title" value={{row[0].title}}>
+    </div>
+    <div>
+        <label>내용: </label>
+        <textarea name="content" id="content" cols="30" rows="10">{{row[0].content}}</textarea>
+    </div>
+    <div>
+        <button type="reset"><a href="/view/{{row[0].num}}">취소</a></button>
+        <button type="submit">저장</button>
+    </div>
+</form>
+{% endblock %}

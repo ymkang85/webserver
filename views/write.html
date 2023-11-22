@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<form action="write" class="write_container" method="post">
+    <h1>{{title}}</h1>
+    <div>
+        <h3>제목</h3>
+        <input type="text" name="title" id="title" class="form-control" placeholder="제목" required />
+    </div>
+    <div>
+        <h3>내용</h3>
+        <textarea type="text" name="content" id="content" class="form-control"></textarea>
+    </div>
+    <div>
+        <button><a href="/">취소</a></button>
+        <button type="submit">저장</button>
+    </div>
+</form>
+{% endblock %}

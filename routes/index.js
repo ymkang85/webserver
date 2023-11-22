@@ -28,7 +28,6 @@ router.get("/write", (req, res) => {
 
 router.post("/write", (req, res) => {
     const rs = req.body;
-    console.log(rs);
     const sql = "insert into testdb(title, content, clickcount) values(?,?,?) ";
     conn.query(sql, [
         rs.title,
@@ -46,14 +45,19 @@ router.post("/write", (req, res) => {
 
 router.get("/view/:num", (req, res) => {
     const {num} = req.params;
-    const rs = req.body;
-    console.log(rs);
     let sql = "select * from testdb where num = ?";
     conn.query(sql, [num], (err, row, fields) => {
         if (err) {
             console.log(err);
-        } else {            
-            res.render("view", { title: "게시판 내용보기", row })
+        } else {
+            let sql = "update testdb set clickcount = clickcount+1 where num = ?";
+            conn.query(sql, [num], (err, row, fields) => {
+                if(err){
+                    console.log(err);
+                }else{
+                    res.render("view", { title: "게시판 내용보기", row })
+                }
+            });
         }
     })
 })

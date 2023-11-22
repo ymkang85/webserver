@@ -44,26 +44,21 @@ router.post("/write", (req, res) => {
 });
 
 router.get("/view/:num", (req, res) => {
-    const {num} = req.params;
+    const { num } = req.params;
     let sql = "select * from testdb where num = ?";
     conn.query(sql, [num], (err, row, fields) => {
         if (err) {
             console.log(err);
         } else {
-            let sql = "update testdb set clickcount = clickcount+1 where num = ?";
-            conn.query(sql, [num], (err, row, fields) => {
-                if(err){
-                    console.log(err);
-                }else{
-                    res.render("view", { title: "게시판 내용보기", row })
-                }
-            });
+            sql = "update testdb set clickcount = clickcount+1 where num = ?";
+            conn.query(sql, [num]);
+            res.render("view", { title: "게시판 내용보기", row })
         }
     })
 })
 
 router.get("/edit/:num", (req, res) => {
-    const {num} = req.params;    
+    const { num } = req.params;
     const sql = "select * from testdb where num = ?";
     conn.query(sql, [num], (err, row, fields) => {
         if (err) {
@@ -75,7 +70,7 @@ router.get("/edit/:num", (req, res) => {
 });
 
 router.post("/edit/:num", (req, res) => {
-    const {num} = req.params;
+    const { num } = req.params;
     const rs = req.body;
     console.log(req.body);
     const sql = "update testdb set ? where num = ?";
@@ -93,11 +88,11 @@ router.post("/edit/:num", (req, res) => {
     res.redirect('/view/' + num);
 });
 
-router.get("/del/:num", (req, res) =>{
-    const {num} = req.params;
+router.get("/del/:num", (req, res) => {
+    const { num } = req.params;
     const sql = "delete from testdb where num = ?";
     conn.query(sql, [num], (err, row, fields) => {
-        if(err) {
+        if (err) {
             console.log(err);
         } else {
             console.log("삭제성공");
